@@ -1,16 +1,12 @@
 <?php
 include 'koneksi.php';
 
-/* ======================
-   HITUNG JUMLAH ARTICLE
-====================== */
+
 $sqlCount = "SELECT COUNT(*) AS total FROM article";
 $resultCount = $conn->query($sqlCount);
 $totalArticle = $resultCount->fetch_assoc()['total'] ?? 0;
 
-/* ======================
-   AMBIL DATA ARTICLE
-====================== */
+
 $sql = "SELECT * FROM article ORDER BY tanggal DESC";
 $result = $conn->query($sql);
 ?>
@@ -18,7 +14,7 @@ $result = $conn->query($sql);
 <div class="container">
 		<div class="row mb-2">
         <div class="col-md-6">
-            <!-- button -->
+            
         </div>
         <div class="col-md-6">
         <div class="input-group">
@@ -29,7 +25,7 @@ $result = $conn->query($sql);
         </div>
         </div>
     </div>
-    <!-- TOMBOL TAMBAH -->
+    
     <button
         type="button"
         class="btn btn-secondary mb-3"
@@ -39,7 +35,6 @@ $result = $conn->query($sql);
          Tambah Article
     </button>
 
-    <!-- TABEL ARTICLE -->
     <div class="table-responsive">
         <table class="table table-hover align-middle">
             <thead class="table-dark">
@@ -80,7 +75,6 @@ $result = $conn->query($sql);
                             <a href="#" title="edit" class="badge rounded-pill text-bg-success" data-bs-toggle="modal" data-bs-target="#modalEdit<?= $row["id"] ?>"><i class="bi bi-pencil"></i></a>
                             <a href="#" title="delete" class="badge rounded-pill text-bg-danger" data-bs-toggle="modal" data-bs-target="#modalHapus<?= $row["id"] ?>"><i class="bi bi-x-circle"></i></a>
 
-<!-- Awal Modal Edit -->
 <div class="modal fade" id="modalEdit<?= $row["id"] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -123,9 +117,7 @@ $result = $conn->query($sql);
         </div>
     </div>
 </div>
-<!-- Akhir Modal Edit -->
 
-<!-- Awal Modal Hapus -->
 <div class="modal fade" id="modalHapus<?= $row["id"] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -149,7 +141,7 @@ $result = $conn->query($sql);
         </div>
     </div>
 </div>
-<!-- Akhir Modal Hapus -->
+
                         </td>
                     </tr>
                 <?php endwhile; ?>
@@ -166,9 +158,7 @@ $result = $conn->query($sql);
     </div>
 </div>
 
-<!-- ======================
-     MODAL TAMBAH ARTICLE
-====================== -->
+
 <div class="modal fade" id="modalTambah" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -263,16 +253,16 @@ if (isset($_POST['simpan'])) {
         }
     }
 
-   		//cek apakah ada id yang dikirimkan dari form
+   
     if (isset($_POST['id'])) {
-        //jika ada id, lakukan update data dengan id tersebut
+   
         $id = $_POST['id'];
 
         if ($nama_gambar == '') {
-            //jika tidak ganti gambar
+
             $gambar = $_POST['gambar_lama'];
         } else {
-            //jika ganti gambar, hapus gambar lama
+           
             unlink("img/" . $_POST['gambar_lama']);
         }
 
@@ -288,7 +278,6 @@ if (isset($_POST['simpan'])) {
         $stmt->bind_param("sssssi", $judul, $isi, $gambar, $tanggal, $username, $id);
         $simpan = $stmt->execute();
     } else {
-		    //jika tidak ada id, lakukan insert data baru
         $stmt = $conn->prepare("INSERT INTO article (judul,isi,gambar,tanggal,username)
                                 VALUES (?,?,?,?,?)");
 
@@ -311,13 +300,13 @@ if (isset($_POST['simpan'])) {
     $conn->close();
 }
 
-//jika tombol hapus diklik
+
 if (isset($_POST['hapus'])) {
     $id = $_POST['id'];
     $gambar = $_POST['gambar'];
 
     if ($gambar != '') {
-        //hapus file gambar dari folder /img
+        
         unlink("img/" . $gambar);
     }
 

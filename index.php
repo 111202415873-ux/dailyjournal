@@ -4,381 +4,190 @@ include "koneksi.php";
 ?>
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My Daily Journal</title>
     <link rel="icon" href="gambar/lion-head-png-logo-4.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <style>
-        /* Default Light Theme */
-        body {
-            background-color: #ffffff;
-            color: #000000;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            font-family: Arial, sans-serif;
-        }
-
-        /* Dark Theme */
-        .dark-theme {
-            background-color: #1e1e1e;
-            color: #ffffff;
-        }
-
-        .dark-theme nav {
-            background-color: #333 !important;
-        }
-
-        .dark-theme .navbar-nav .nav-link {
-            color: rgba(255, 255, 255, 0.8) !important;
-        }
-
-        .dark-theme .navbar-nav .nav-link:hover {
-            color: #ffffff !important;
-        }
-
-        .dark-theme .list-group-item {
-            background-color: #2d2d2d;
-            color: #ffffff;
-            border-color: #444;
-        }
-
-        .dark-theme .list-group-item.active {
-            background-color: #0d6efd;
-            border-color: #0d6efd;
-        }
-
-        .theme-buttons {
-            display: flex;
-            align-items: center;
-            margin-left: 15px;
-        }
-
-        .theme-buttons button {
-            font-size: 18px;
-            padding: 6px 10px;
-            margin-left: 5px;
-            cursor: pointer;
-            border: none;
-            border-radius: 6px;
-            background-color: #f8f9fa;
-            transition: all 0.2s;
-        }
-
-        .theme-buttons button:hover {
-            background-color: #e9ecef;
-            transform: scale(1.1);
-        }
-
-        .dark-theme .theme-buttons button {
-            background-color: #444;
-            color: white;
-        }
-
-        .dark-theme .theme-buttons button:hover {
-            background-color: #555;
-        }
-
-        section {
-            padding: 60px 0;
-        }
-
-        .card {
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .carousel-item img {
-            height: 500px;
-            object-fit: cover;
-        }
-
-        #hero {
-            background-color: #f8d7da;
-        }
-
-        .dark-theme #hero {
-            background-color: #2c1b1d;
-        }
-
-        .navbar-brand {
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+
+    <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="#">Jurnal Saya</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand fw-bold" href="#">Jurnal Saya</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#hero">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#Article">Article</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#Gallery">Gallery</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#Schedule">Schedule</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#About-Me">About Me</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.php" target="_blank">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <div class="theme-buttons">
-                            <button id="darkBtn" title="Dark Mode">🌙</button>
-                            <button id="lightBtn" title="Light Mode">☀️</button>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#hero">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#article">Article</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#Gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#Schedule">Schedule</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#About-Me">About Me</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="login.php" target="_blank">Login</a></li>
+                    <li class="nav-item ms-lg-3 py-2 py-lg-0">
+                        <div class="btn-group border rounded-pill overflow-hidden">
+                            <button id="lightBtn" class="btn btn-sm btn-light">☀️</button>
+                            <button id="darkBtn" class="btn btn-sm btn-dark">🌙</button>
                         </div>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <!-- Navbar End -->
-
-    <!-- Hero Section -->
-    <section id="hero" class="text-center py-5">
-        <div class="container">
+    <section id="hero" class="py-5 bg-danger-subtle text-danger-emphasis">
+        <div class="container py-5">
             <div class="row align-items-center">
-                <div class="col-md-6 order-md-2">
-                    <img src="gambar/lion-head-png-logo-4.png" class="img-fluid" alt="Logo" style="max-width: 300px;">
+                <div class="col-md-6 order-md-2 text-center">
+                    <img src="gambar/lion-head-png-logo-4.png" class="img-fluid" alt="Logo" style="max-height: 300px;">
                 </div>
-                <div class="col-md-6 order-md-1 text-md-start">
+                <div class="col-md-6 order-md-1 text-md-start text-center">
                     <h1 class="fw-bold display-4 mb-3">Create Memories, Save Memories Everyday</h1>
                     <p class="lead fs-4">Mencatat semua kegiatan sehari-hari yang ada tanpa terkecuali</p>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Hero Section End -->
-
-<!--article begin-->
-      <section id="article" class="text-center p-5">
+    <section id="article" class="py-5">
         <div class="container">
-          <h1 class="fw-bold display-4 pb-3">Article</h1>
-          <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
-        <?php
-        $sql = "SELECT * FROM article ORDER BY tanggal DESC";
-        $hasil = $conn->query($sql); 
-
-        while($row = $hasil->fetch_assoc()){
-        ?>
-        <!--col begin-->
-            <div class="col">
-            <div class="card h-100">
-                    <img src="gambar/<?=$row["gambar"]?>" class="card-img-top" alt="..."/>
-                <div class="card-body">
-                    <h5 class="card-title"><?=$row["judul"]?></h5>
-                    <p class="card-text"><?=$row["isi"]?></p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-body-secondary"><?=$row["tanggal"]?></small>
-                </div>
-            </div>
-            </div>
-        <!--col end-->
-        <?php
-        }
-        ?>
-          </div>
-        </div>
-      </section>
-      <!--article end-->
-
-    <!-- Gallery Section -->
-    <section id="Gallery" class="py-5 bg-light">
-        <div class="container">
-            <h1 class="fw-bold text-center display-4 mb-5">Gallery</h1>
-            <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner rounded">
-                    <div class="carousel-item active">
-                        <img src="gambar/marten-bjork-6dW3xyQvcYE-unsplash.jpg" class="d-block w-100" alt="Gallery Image 1">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="gambar/kerja-kelompok.jpg" class="d-block w-100" alt="Gallery Image 2">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="gambar/pulang.jpg" class="d-block w-100" alt="Gallery Image 3">
+            <h1 class="fw-bold text-center display-4 mb-5">Article</h1>
+            <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+                <?php
+                $sql = "SELECT * FROM article ORDER BY tanggal DESC";
+                $hasil = $conn->query($sql); 
+                while($row = $hasil->fetch_assoc()){
+                ?>
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="gambar/<?=$row["gambar"]?>" class="card-img-top" alt="..." style="height: 200px; object-fit: cover;"/>
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold"><?=$row["judul"]?></h5>
+                            <p class="card-text text-secondary"><?=$row["isi"]?></p>
+                        </div>
+                        <div class="card-footer bg-transparent border-top-0">
+                            <small class="text-body-secondary"><?=$row["tanggal"]?></small>
+                        </div>
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                <?php } ?>
             </div>
         </div>
     </section>
-    <!-- Gallery Section End -->
-
-    <!-- Schedule Section -->
+    <section id="Gallery" class="py-5 bg-body-secondary">
+        <div class="container">
+            <h1 class="fw-bold text-center display-4 mb-5">Gallery</h1>
+            <?php
+            $sqlGallery = "SELECT * FROM gallery ORDER BY tanggal DESC";
+            $resultGallery = $conn->query($sqlGallery);
+            if ($resultGallery && $resultGallery->num_rows > 0):
+            ?>
+            <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner rounded-4 shadow">
+                    <?php
+                    $active = true;
+                    while ($row = $resultGallery->fetch_assoc()):
+                    ?>
+                    <div class="carousel-item <?= $active ? 'active' : '' ?>">
+                        <img src="gambar/<?= $row['gambar']; ?>" class="d-block w-100" style="height: 500px; object-fit: cover;" alt="...">
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded px-3">
+                            <h5><?= htmlspecialchars($row['judul']); ?></h5>
+                            <small><?= $row['tanggal']; ?></small>
+                        </div>
+                    </div>
+                    <?php $active = false; endwhile; ?>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+            <?php else: ?>
+                <p class="text-center text-muted">Belum ada gallery</p>
+            <?php endif; ?>
+        </div>
+    </section>
     <section id="Schedule" class="py-5">
         <div class="container">
             <h1 class="fw-bold text-center display-4 mb-5">Schedule</h1>
-            <div class="row g-4">
-                <div class="col-md-3 col-sm-6">
-                    <div class="card h-100 text-center">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 text-center">
+                <?php
+                $schedules = [
+                    ["Membaca", "Reading books to gain knowledge and improve language skills."],
+                    ["Menulis", "Writing journals and notes to document daily activities."],
+                    ["Olahraga", "Physical exercise to maintain health and fitness."],
+                    ["Belajar", "Studying course materials and completing assignments."],
+                    ["Kuliah", "Attending lectures and participating in class activities."],
+                    ["Jalan", "Walking for relaxation and exploring the environment."],
+                    ["Makan", "Having meals to maintain energy and health."],
+                    ["Tidur", "Getting enough rest for physical and mental recovery."]
+                ];
+                foreach ($schedules as $s): ?>
+                <div class="col">
+                    <div class="card h-100 border-danger-subtle shadow-sm">
                         <div class="card-body">
-                            <h5 class="card-title">Membaca</h5>
-                            <p class="card-text">Reading books to gain knowledge and improve language skills.</p>
+                            <h5 class="card-title fw-bold text-danger"><?= $s[0] ?></h5>
+                            <p class="card-text small text-body-secondary"><?= $s[1] ?></p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="card h-100 text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Menulis</h5>
-                            <p class="card-text">Writing journals and notes to document daily activities.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="card h-100 text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Olahraga</h5>
-                            <p class="card-text">Physical exercise to maintain health and fitness.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="card h-100 text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Belajar</h5>
-                            <p class="card-text">Studying course materials and completing assignments.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="card h-100 text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Kuliah</h5>
-                            <p class="card-text">Attending lectures and participating in class activities.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="card h-100 text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Jalan</h5>
-                            <p class="card-text">Walking for relaxation and exploring the environment.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="card h-100 text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Makan</h5>
-                            <p class="card-text">Having meals to maintain energy and health.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="card h-100 text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Tidur</h5>
-                            <p class="card-text">Getting enough rest for physical and mental recovery.</p>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
-    <!-- Schedule Section End -->
-
-    <!-- About Me Section -->
-    <section id="About-Me" class="py-5 bg-light">
+    <section id="About-Me" class="py-5 bg-body-secondary">
         <div class="container">
             <h1 class="fw-bold text-center display-4 mb-5">About Me</h1>
             <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="list-group">
-                        <a href="https://www.dinus.ac.id/" class="list-group-item list-group-item-action active" target="_blank">
+                <div class="col-md-8 text-center">
+                    <div class="card border-0 shadow-sm overflow-hidden">
+                        <div class="bg-danger text-white p-3 fw-bold fs-5">
                             UNIVERSITAS DIAN NUSWANTORO
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">Nama: [Your Name]</a>
-                        <a href="#" class="list-group-item list-group-item-action">Program Studi: [Your Major]</a>
-                        <a href="#" class="list-group-item list-group-item-action">Semester: [Current Semester]</a>
-                        <a href="#" class="list-group-item list-group-item-action">Hobi: Membaca, Menulis, Olahraga</a>
+                        </div>
+                        <div class="list-group list-group-flush py-3">
+                            <div class="list-group-item border-0 fs-5"><strong>Nama:</strong> Muhammad Iqbal Kurniawan</div>
+                            <div class="list-group-item border-0 fs-5"><strong>Program Studi:</strong> Teknik Informatika</div>
+                            <div class="list-group-item border-0 fs-5"><strong>Semester:</strong> 3 (tiga)</div>
+                            <div class="list-group-item border-0 fs-5"><strong>Hobi:</strong> Membaca, Menulis, Olahraga</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- About Me Section End -->
-
-    <!-- Footer -->
-    <footer class="py-4 bg-dark text-white text-center">
+    <footer class="py-5 bg-dark text-white text-center">
         <div class="container">
-            <p class="mb-0">&copy; 2023 Jurnal Saya. All rights reserved.</p>
-            <p class="mb-0">Create Memories, Save Memories Everyday</p>
+            <div class="mb-3 fs-3">
+                <i class="bi bi-instagram mx-2"></i>
+                <i class="bi bi-twitter mx-2"></i>
+                <i class="bi bi-whatsapp mx-2"></i>
+            </div>
+            <p class="mb-1">&copy; 2026 Jurnal Saya. All rights reserved.</p>
+            <p class="small opacity-50">Create Memories, Save Memories Everyday</p>
         </div>
     </footer>
-    <!-- Footer End -->
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Theme Toggle Functionality
+        const html = document.documentElement;
         const darkBtn = document.getElementById("darkBtn");
         const lightBtn = document.getElementById("lightBtn");
-        const body = document.body;
 
-        // Check for saved theme or prefer-color-scheme
-        const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
-        const currentTheme = localStorage.getItem("theme");
+        const currentTheme = localStorage.getItem("theme") || "light";
+        html.setAttribute("data-bs-theme", currentTheme);
 
-        // Apply saved theme or system preference
-        if (currentTheme === "dark" || (!currentTheme && prefersDarkScheme.matches)) {
-            body.classList.add("dark-theme");
-        }
-
-        // Dark Mode Button
         darkBtn.addEventListener("click", () => {
-            body.classList.add("dark-theme");
+            html.setAttribute("data-bs-theme", "dark");
             localStorage.setItem("theme", "dark");
         });
 
-        // Light Mode Button
         lightBtn.addEventListener("click", () => {
-            body.classList.remove("dark-theme");
+            html.setAttribute("data-bs-theme", "light");
             localStorage.setItem("theme", "light");
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
-                }
-            });
         });
     </script>
 </body>
